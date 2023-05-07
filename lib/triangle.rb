@@ -1,6 +1,5 @@
 class Triangle
-
-  attr_accessor :side1, :side2, :side3
+  attr_reader :side1, :side2, :side3
 
   def initialize(side1, side2, side3)
     @side1 = side1
@@ -13,25 +12,25 @@ class Triangle
     if side1 == side2 && side2 == side3
       :equilateral
     elsif side1 == side2 || side2 == side3 || side1 == side3
-    :isosceles
-    else
+      :isosceles
+    else 
       :scalene
     end
   end
 
-  def sides_greater_than_zero?
+  def sides_greater_than_zero
     [side1, side2, side3].all?(&:positive?)
   end
 
-  def valid_triangle_inequality?
-    side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side1
+  def valid_triangle_inequality
+    side1 + side2 > side3 && side2 + side3 > side1 && side1 + side3 > side2
   end
 
   def is_triangle
-    raise TriangleError unless sides_greater_than_zero? && valid_triangle_inequality?
+    raise TriangleError unless sides_greater_than_zero && valid_triangle_inequality
   end
 
   class TriangleError < StandardError
   end
 
-end
+end 
